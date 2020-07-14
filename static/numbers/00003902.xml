@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Car>
+	<Id>2495</Id>
+	<TriggerId>1</TriggerId>
+	<IsGrammarOk>0</IsGrammarOk>
+	<Country></Country>
+	<AvgQuality>0.00</AvgQuality>
+	<License></License>
+	<MinQuality>0.00</MinQuality>
+	<NumberOfUnknownChars>0</NumberOfUnknownChars>
+	<ROI>
+		<Left>0</Left>
+		<Top>0</Top>
+		<Right>0</Right>
+		<Bottom>0</Bottom>
+	</ROI>
+	<TimeStamp>
+		<Seconds>1583659295</Seconds>
+		<USeconds>12513</USeconds>
+		<Date>2020-03-08</Date>
+		<Time>12:21:35.12513</Time>
+	</TimeStamp>
+	<Chars>
+	</Chars>
+</Car>

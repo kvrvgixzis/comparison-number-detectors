@@ -12,6 +12,9 @@ for d in mc.find():
     xml = ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License').text
     if xml:
         xml = xml.replace("|", "")
+        xml = xml.replace("?", "")
+        if not xml:
+            xml = None
     if not d['detections'] and not xml:
         percents['green'] += 1
     elif not d['detections'] and xml:
@@ -24,6 +27,7 @@ for d in mc.find():
         percents['green'] += 1
     else:
         print(f'nu tut nado smotret {d["detections"][0]["number"]}/{xml}')
+
 
 @app.route('/')
 def index():
@@ -41,6 +45,9 @@ def index():
         xml = ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "")
         if xml:
             xml = xml.replace("|", "")
+            xml = xml.replace("?", "")
+            if not xml:
+                xml = None
         if n['detections']:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": n['detections'][0]['number'],
                        "detections_AI": {'number': n['detections'][0]['number'], 'crop': b64encode(n['detections'][0]['image']).decode("utf-8")},

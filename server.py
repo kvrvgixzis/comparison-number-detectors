@@ -24,7 +24,7 @@ def index():
         if n['detections']:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": n['detections'][0]['number'],
                        "detections_AI": {'number': n['detections'][0]['number'], 'crop': b64encode(n['detections'][0]['image']).decode("utf-8")},
-                       'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", ""),
+                       'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "") if ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License') else None,
                        'state': n.get('state', None)})
         else:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": None, "detections_AI": None,

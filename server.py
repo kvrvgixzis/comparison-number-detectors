@@ -9,10 +9,13 @@ app = Flask(__name__)
 
 percents = {'red': 0, 'green': 0, 'yellow': 0}
 for d in mc.find():
-    xml = ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "") if ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License') else None
-
+    xml = ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License').text
+    if xml:
+        xml = xml.replace("|", "")
     if not d['detections'] and not xml:
         percents['green'] += 1
+    elif not d['detections'] and xml:
+        percents['red'] += 1
     elif d['detections'][0]['number'] and not xml:
         percents['yellow'] += 1
     elif d['detections'][0]['number'] != xml:
@@ -21,7 +24,6 @@ for d in mc.find():
         percents['green'] += 1
     else:
         print(f'nu tut nado smotret {d["detections"][0]["number"]}/{xml}')
-
 
 @app.route('/')
 def index():
@@ -36,14 +38,17 @@ def index():
     context['last'] = end
     nn = []
     for n in numbers:
+        xml = ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "")
+        if xml:
+            xml = xml.replace("|", "")
         if n['detections']:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": n['detections'][0]['number'],
                        "detections_AI": {'number': n['detections'][0]['number'], 'crop': b64encode(n['detections'][0]['image']).decode("utf-8")},
-                       'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "") if ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License') else None,
+                       'xml_number': xml,
                        'state': n.get('state', None)})
         else:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": None, "detections_AI": None,
-                       'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "") if ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License') else None,
+                       'xml_number': xml,
                        'state': n.get('state', None)})
 
         # for number in n['detections']:

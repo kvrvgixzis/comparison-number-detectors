@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Cars difference</title>
+    <script src="static/js/index.js"></script>
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
-
-<script src="static/js/index.js"></script>
-<link rel="stylesheet" href="static/css/index.css">
 
 <body>
     <div class="container">
+
         <div class="nav">
             {% if last > 10 %} <button class="nav__el nav__back" onclick="window.location.href='/?start={{ last-20 }}&end={{ last-10 }}'">Back</button> {% endif %}
             <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>
@@ -32,20 +32,26 @@
                 {% endif %}
 
                 <img class="card__img" src="static/numbers/{{ i.image_name }}">
+
                 {% if i.numbers_AI %} 
                     <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> 
                 {% else %}
-                    <div class="card__crop-none"></div>
+                    <div class="card__crop-placeholder"></div>
                 {% endif %}
+
                 <div class="card__right-block">
                     <div class="card__detect card__our-detect">Our detection: <div class="number">{{ i.numbers_AI }}</div></div>
                     <div class="card__detect card__they-detect">Their detection: <div class="number">{{ i.xml_number }}</div> </div>
                 </div>
+
             </div>
         {% endfor %}
-        <form>
-        <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='/?start={{ last }}&end={{ last + 10  }}'" />
-        </form>    
+
+        <div class="nav">
+            {% if last > 10 %} <button class="nav__el nav__back" onclick="window.location.href='/?start={{ last-20 }}&end={{ last-10 }}'">Back</button> {% endif %}
+            <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>
+            <button class="nav__el nav__next" onclick="window.location.href='/?start={{ last }}&end={{ last+10 }}'">Next</button>
+        </div>   
     </div>
 </body>
 </html>

@@ -7,13 +7,28 @@ from base64 import b64encode
 mc = MongoClient(host='192.168.0.101', port=27017)['faces2']['numbers_test']
 app = Flask(__name__)
 
+percents = {'red': 0, 'green': 0, 'yellow': 0}
+for d in mc.find():
+    xml = ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "") if ET.parse(f'./static/numbers/{d["stream_name"].split(".")[0]}.xml').getroot().find('License') else None
+
+    if not d['detections'] and not xml:
+        percents['green'] += 1
+    elif d['detections'][0]['number'] and not xml:
+        percents['yellow'] += 1
+    elif d['detections'][0]['number'] != xml:
+        percents['red'] += 1
+    elif d['detections'][0]['number'] == xml:
+        percents['green'] += 1
+    else:
+        print(f'nu tut nado smotret {d["detections"][0]["number"]}/{xml}')
+
 
 @app.route('/')
 def index():
 
     start = request.args.get('start', default=0, type=int)
     end = request.args.get('end', default=start+10, type=int)
-    context = {'count': mc.count()}
+    context = {'count': mc.count(), 'percents': {'absolute': percents, 'relative': {k: v/sum(percents.values())*100 for k, v in percents.items()}}}
     if start >= context['count']:
         start = context['count'] - 10
         end = context['count']

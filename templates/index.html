@@ -17,36 +17,51 @@
             <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>
             <button class="nav__el nav__next" onclick="window.location.href='/?start={{ last }}&end={{ last+10 }}'">Next</button>
         </div>
-  
-        {% for i in numbers %}
-            <div class="card {{ i.image_name }}">
-
-                {% if not i.numbers_AI and not i.xml_number %} 
-                    <div class="bagetf green"></div>
-                {% elif i.numbers_AI and not i.xml_number %}
-                    <div class="bagetf yellow"></div>
-                {% elif i.numbers_AI != i.xml_number %}
-                    <div class="bagetf red"></div>
-                {% elif i.numbers_AI == i.xml_number %}
-                    <div class="bagetf green"></div>
-                {% endif %}
-
-                <img class="card__img" src="static/numbers/{{ i.image_name }}">
-
-                {% if i.numbers_AI %} 
-                    <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> 
-                {% else %}
-                    <div class="card__crop-placeholder"></div>
-                {% endif %}
-
-                <div class="card__right-block">
-                    <div class="card__detect card__our-detect">Our detection: <div class="number">{{ i.numbers_AI }}</div></div>
-                    <div class="card__detect card__they-detect">Their detection: <div class="number">{{ i.xml_number }}</div> </div>
-                </div>
-
+        <div class="stat">
+            <div class="stat__el">
+                <div class="stat__header">50</div>
+                <progress class="stat__green" max="100" value="50"></progress>
             </div>
-        {% endfor %}
+            <div class="stat__el">
+                <div class="stat__header">75</div>
+                <progress class="stat__yellow" max="100" value="75"></progress>
+            </div>
+            <div class="stat__el">
+                <div class="stat__header">25</div>
+                <progress class="stat__red" max="100" value="25"></progress>
+            </div>
+        </div>
+        <div class="cards">
+            {% for i in numbers %}
+                <div class="card {{ i.image_name }}">
 
+                    {% if not i.numbers_AI and not i.xml_number %} 
+                        <div class="bagetf green"></div>
+                    {% elif i.numbers_AI and not i.xml_number %}
+                        <div class="bagetf yellow"></div>
+                    {% elif i.numbers_AI != i.xml_number %}
+                        <div class="bagetf red"></div>
+                    {% elif i.numbers_AI == i.xml_number %}
+                        <div class="bagetf green"></div>
+                    {% endif %}
+
+                    <img class="card__img" src="static/numbers/{{ i.image_name }}">
+
+                    {% if i.numbers_AI %} 
+                        <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> 
+                    {% else %}
+                        <div class="card__crop-placeholder"></div>
+                    {% endif %}
+
+                    <div class="card__right-block">
+                        <div class="card__detect card__our-detect">Our detection: <div class="number">{{ i.numbers_AI }}</div></div>
+                        <div class="card__detect card__they-detect">Their detection: <div class="number">{{ i.xml_number }}</div> </div>
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+        
         <div class="nav">
             {% if last > 10 %} <button class="nav__el nav__back" onclick="window.location.href='/?start={{ last-20 }}&end={{ last-10 }}'">Back</button> {% endif %}
             <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>

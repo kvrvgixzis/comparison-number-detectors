@@ -14,6 +14,24 @@ function myfunction(url)
     console.log(url)
 }
 
+function filterCards(className) {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        card.classList.remove('hide');
+    });
+    cards.forEach(card => {
+        if (!card.classList.contains(`card__${className}`)) {
+            card.classList.add('hide');
+        }
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    document.querySelector('.green-txt').addEventListener('click', () => filterCards('green'));
+    document.querySelector('.yellow-txt').addEventListener('click', () => filterCards('yellow'));
+    document.querySelector('.red-txt').addEventListener('click', () => filterCards('red'));
+});
 
 /* 
     <input type="button" value="function test" onclick="myfunction('/mark?source={{ i.image_name }}&state=true')"/>

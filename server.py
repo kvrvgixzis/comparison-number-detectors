@@ -33,12 +33,13 @@ for d in mc.find():
 def index():
 
     start = request.args.get('start', default=0, type=int)
-    end = request.args.get('end', default=start+10, type=int)
+    end = request.args.get('end', default=mc.count(), type=int)
     context = {'count': mc.count(), 'percents': {'absolute': percents, 'relative': {k: v/sum(percents.values())*100 for k, v in percents.items()}}}
     if start >= context['count']:
         start = context['count'] - 10
         end = context['count']
     numbers = mc.find().skip(start).limit(end-start)
+    
     context['last'] = end
     nn = []
     for n in numbers:

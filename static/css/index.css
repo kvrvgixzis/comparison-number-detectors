@@ -10,12 +10,13 @@ body {
 .container {
     width: 80%;
     min-width: 600px;
-    /* margin: 0 auto; */
+    margin: 0 auto;
 }
 
 .cards {
     margin: 0 auto;
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -150,6 +151,10 @@ body {
 .yellow { background-color: #f8e95e;}
 .red { background-color: #fa7c5a;}
 
-.green-txt { color: #5e975c;}
-.yellow-txt { color: #f8e95e;}
-.red-txt { color: #fa7c5a;}
+.green-txt { color: #5e975c; cursor: pointer;}
+.yellow-txt { color: #f8e95e; cursor: pointer;}
+.red-txt { color: #fa7c5a; cursor: pointer;}
+
+.card.hide {
+   display: none;
+}

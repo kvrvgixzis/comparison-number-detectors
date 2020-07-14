@@ -42,7 +42,7 @@ def index():
     context['last'] = end
     nn = []
     for n in numbers:
-        xml = ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", "")
+        xml = ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text
         if xml:
             xml = xml.replace("|", "")
             xml = xml.replace("?", "")

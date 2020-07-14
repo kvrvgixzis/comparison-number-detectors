@@ -20,13 +20,14 @@ def index():
     context['last'] = end
     nn = []
     for n in numbers:
-        nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": [], "detections_AI": [],
-                   'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text,
+        nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": n['detections'][0]['number'],
+                   "detections_AI": {'number': n['detections'][0]['number'], 'crop': n['detections'][0]['image']},
+                   'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", ""),
                    'state': n.get('state', None)})
 
-        for number in n['detections']:
-            nn[-1]['numbers_AI'].append(number['number'])
-            nn[-1]['detections_AI'].append({'number': number['number'], 'crop': number['image']})
+        # for number in n['detections']:
+        #     nn[-1]['numbers_AI'].append(number['number'])
+        #     nn[-1]['detections_AI'].append({'number': number['number'], 'crop': number['image']})
     context['numbers'] = nn
     return render_template('index.html', **context)
 

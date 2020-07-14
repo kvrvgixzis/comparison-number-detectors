@@ -16,19 +16,16 @@
             {% if last > 10 %} <button class="nav__el nav__back" onclick="window.location.href='/?start={{ last-20 }}&end={{ last-10 }}'">Back</button> {% endif %}
             <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>
             <button class="nav__el nav__next" onclick="window.location.href='/?start={{ last }}&end={{ last+10 }}'">Next</button>
-        </div>
-        <div class="stat">
-            <div class="stat__el">
-                <div class="stat__header">50</div>
-                <progress class="stat__green" max="100" value="50"></progress>
-            </div>
-            <div class="stat__el">
-                <div class="stat__header">75</div>
-                <progress class="stat__yellow" max="100" value="75"></progress>
-            </div>
-            <div class="stat__el">
-                <div class="stat__header">25</div>
-                <progress class="stat__red" max="100" value="25"></progress>
+            <div class="stat">
+                <div class="stat__el">
+                    <div class="stat__header green-txt">{{percents['absolute']['green']}}</div>
+                </div>
+                <div class="stat__el">
+                    <div class="stat__header yellow-txt">{{percents['absolute']['yellow']}}</div>
+                </div>
+                <div class="stat__el">
+                    <div class="stat__header red-txt">{{percents['absolute']['red']}}</div>
+                </div>
             </div>
         </div>
         <div class="cards">

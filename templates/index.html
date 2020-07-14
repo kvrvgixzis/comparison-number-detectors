@@ -17,10 +17,11 @@
         </form>
         {% for i in numbers %}
             <div class="card {{ i.image_name }}">
-                <img class="card__img" src="static/numbers/{{ i.image_name  }}">
+                <img class="card__img" src="static/numbers/{{ i.image_name }}">
+                {% if i.numbers_AI %} <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> {% endif %}
                 <div class="card__right-block">
-                    <div>Our detection: {{ i.numbers_AI }}</div>
-                    <div>They detection: {{ i.xml_number }} </div>
+                    <div class="card__detect card__our-detect">Our detection: {{ i.numbers_AI }}</div>
+                    <div class="card__detect card__they-detect">They detection: {{ i.xml_number }} </div>
                 </div>
             </div>
         {% endfor %}

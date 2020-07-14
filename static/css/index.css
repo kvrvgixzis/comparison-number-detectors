@@ -1,23 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #eeeeee;
 }
 
+.container {
+    width: 40%;
+    min-width: 600px;
+    margin: 0 auto;
+}
+
 .card {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
     background-color: #fff;
 }
-
-.card__right-block {
-    padding: 20px;
-}
-
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
@@ -26,8 +32,21 @@ body {
     height: 200px;
 }
 
-.container {
-    width: 40%;
-    min-width: 600px;
-    margin: 0 auto;
+.card__crop {
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
+
+.card__right-block {
+    width: 100%;
+}
+
+.card__detect {
+    height: 100px;
+    padding: 20px;
+}
+
+
+

@@ -2,6 +2,7 @@ from pymongo import MongoClient
 from flask import Flask, request, render_template, jsonify
 import xml.etree.ElementTree as ET
 import os
+from base64 import b64encode
 
 mc = MongoClient(host='192.168.0.101', port=27017)['faces2']['numbers_test']
 app = Flask(__name__)
@@ -22,7 +23,7 @@ def index():
     for n in numbers:
         if n['detections']:
             nn.append({'image_name': n['stream_name'], 'image': n['image'], "numbers_AI": n['detections'][0]['number'],
-                       "detections_AI": {'number': n['detections'][0]['number'], 'crop': n['detections'][0]['image']},
+                       "detections_AI": {'number': n['detections'][0]['number'], 'crop': b64encode(n['detections'][0]['image']).decode("utf-8")},
                        'xml_number': ET.parse(f'./static/numbers/{n["stream_name"].split(".")[0]}.xml').getroot().find('License').text.replace("|", ""),
                        'state': n.get('state', None)})
         else:

@@ -64,7 +64,7 @@ body {
     border-radius: 5px;
 }
 
-.card__crop-none {
+.card__crop-placeholder {
     height: 50px;
     width: 230px;
     position: absolute;
@@ -104,6 +104,7 @@ body {
 }
 .nav__el {
     margin: 5px;
+    margin-left: 10px;
     border: none;
     border-radius: 5px;
     background-color: #fff;

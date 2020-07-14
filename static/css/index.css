@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -17,7 +18,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin: 10px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -28,23 +29,47 @@ body {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
+.bagetf {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 50%;
+}
+
+.green {
+    background-color: #98ee95;
+}
+
+.yellow {
+    background-color: #f8e95e;
+}
+
+.red {
+    background-color: #fa7c5a;
+}
+
 .card__img {
     height: 200px;
+    width: 290px;
 }
 
 .card__crop {
     height: 50px;
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 5px;
+    right: 5px;
+    border-radius: 5px;
 }
 
 .card__right-block {
+    flex-direction: column;
     width: 100%;
 }
 
 .card__detect {
-    height: 100px;
+    height: 50px;
     padding: 20px;
 }
 

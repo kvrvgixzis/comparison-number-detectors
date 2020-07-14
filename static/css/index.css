@@ -1,0 +1,28 @@
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.card__right-block {
+    padding: 20px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card__img {
+    height: 200px;
+}
+
+.container {
+    width: 40%;
+    min-width: 600px;
+    margin: 0 auto;
+}

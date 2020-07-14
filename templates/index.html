@@ -6,46 +6,26 @@
     <title>Cars difference</title>
 </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-
-<script type="text/javascript">
-function myfunction(url)
-{
-    console.log(url)
-    const request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-url');
-    request.addEventListener("readystatechange", () => {
-	if (request.readyState === 4 && request.status === 200) {
-	  console.log( request.responseText );
-
-    }
-    });
-    request.send();
-    console.log(url)
-}
-
-</script>
+<script src="static/js/index.js"></script>
+<link rel="stylesheet" href="static/css/index.css">
 
 <body>
-    <form>
-    <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='http://192.168.0.138:8000/?start={{ last }}&end={{ last + 10  }}'" />
-    </form>
-    <br>
-    {% for i in numbers %}
-        <div class="{{ i.image_name }}">
-            <p>{{ i.image_name }}</p>
-            <img src="static/numbers/{{ i.image_name  }}">
-            <p> state {{ i.state }} they {{ i.xml_number }} ours {{ i.numbers_AI }}</p>
-            <input type="button" value="function test" onclick="myfunction('http://192.168.0.138:8000/mark?source={{ i.image_name }}&state=true')"/>
-            <input type="button" value="ok" onclick="window.location.href= 'http://192.168.0.138:8000/mark?source={{ i.image_name }}&state=true'" />
-            <input type="button" value="ne ok" onclick="window.location.href='http://192.168.0.138:8000/mark?source={{ i.image_name }}&state=false'" />
-            <hr />
-        </div>
-    {% endfor %}
-    <form>
-    <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='http://192.168.0.138:8000/?start={{ last }}&end={{ last + 10  }}'" />
-    </form>
+    <div class="container">
+        <form>
+        <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='/?start={{ last }}&end={{ last + 10  }}'" />
+        </form>
+        {% for i in numbers %}
+            <div class="card {{ i.image_name }}">
+                <img class="card__img" src="static/numbers/{{ i.image_name  }}">
+                <div class="card__right-block">
+                    <div>{{ i.numbers_AI }}</div>
+                    <div>{{ i.xml_number }} </div>
+                </div>
+            </div>
+        {% endfor %}
+        <form>
+        <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='/?start={{ last }}&end={{ last + 10  }}'" />
+        </form>    
+    </div>
 </body>
-
 </html>

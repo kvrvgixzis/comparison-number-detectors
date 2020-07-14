@@ -57,21 +57,61 @@ body {
 
 .card__crop {
     height: 50px;
+    width: 230px;
     position: absolute;
-    bottom: 5px;
-    right: 5px;
+    bottom: 30px;
+    right: 30px;
     border-radius: 5px;
 }
 
+.card__crop-none {
+    height: 50px;
+    width: 230px;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    border-radius: 5px;
+    background-color: #eeeeee;
+}
+
 .card__right-block {
+    margin: 30px;
     flex-direction: column;
     width: 100%;
 }
 
 .card__detect {
-    height: 50px;
-    padding: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
 }
 
+.number {
+    border: 1px solid #000;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 5px;
+    padding: 0 5px;
+    margin-left: 5px;
+}
 
-
+.nav {
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav__el {
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+.nav__cur {
+    padding: 0 10px;
+}

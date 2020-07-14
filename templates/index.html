@@ -12,9 +12,12 @@
 
 <body>
     <div class="container">
-        <form>
-        <input type="button" value="go to {{ last }} - {{ last + 10  }}" onclick="window.location.href='/?start={{ last }}&end={{ last + 10  }}'" />
-        </form>
+        <div class="nav">
+            {% if last > 10 %} <button class="nav__el nav__back" onclick="window.location.href='/?start={{ last-20 }}&end={{ last-10 }}'">Back</button> {% endif %}
+            <div class="nav__el nav__cur">{{ last-10 }} - {{ last }}</div>
+            <button class="nav__el nav__next" onclick="window.location.href='/?start={{ last }}&end={{ last+10 }}'">Next</button>
+        </div>
+  
         {% for i in numbers %}
             <div class="card {{ i.image_name }}">
 
@@ -29,10 +32,14 @@
                 {% endif %}
 
                 <img class="card__img" src="static/numbers/{{ i.image_name }}">
-                {% if i.numbers_AI %} <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> {% endif %}
+                {% if i.numbers_AI %} 
+                    <img class="card__crop" src="data:;base64,{{ i.detections_AI['crop'] }}"> 
+                {% else %}
+                    <div class="card__crop-none"></div>
+                {% endif %}
                 <div class="card__right-block">
-                    <div class="card__detect card__our-detect">Our detection: <span> {{ i.numbers_AI }}</span></div>
-                    <div class="card__detect card__they-detect">Their detection: {{ i.xml_number }} </div>
+                    <div class="card__detect card__our-detect">Our detection: <div class="number">{{ i.numbers_AI }}</div></div>
+                    <div class="card__detect card__they-detect">Their detection: <div class="number">{{ i.xml_number }}</div> </div>
                 </div>
             </div>
         {% endfor %}

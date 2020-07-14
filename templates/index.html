@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Cars difference</title>
 </head>
@@ -18,8 +19,8 @@
             <div class="card {{ i.image_name }}">
                 <img class="card__img" src="static/numbers/{{ i.image_name  }}">
                 <div class="card__right-block">
-                    <div>{{ i.numbers_AI }}</div>
-                    <div>{{ i.xml_number }} </div>
+                    <div>Our detection: {{ i.numbers_AI }}</div>
+                    <div>They detection: {{ i.xml_number }} </div>
                 </div>
             </div>
         {% endfor %}
